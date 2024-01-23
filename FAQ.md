@@ -20,6 +20,9 @@ if [ -f ~/.bashrc ]; then
 fi
 ```
 
+- Problem: Conda runs out of space because you installed it into the wrong folder (home, "~" folder)
+- Solution: Delete the existing installation and install it into the project folder
+
 ## Torch does not find the GPU
 
 - On the tfpool install python 3.8 pytorch 1.13 cuda 11.6 (newer versions of cuda may not work)
@@ -31,12 +34,39 @@ fi
 - work on pool pcs
 - copy to local via vscode (right click -> download)
 - use scp to download data from the tf server to your local machine
-- mount the shared-data1 directory on your local machine using sshfs
+- mount the shared-data directory on your local machine using sshfs
 
 ## Problems with TF pool
 
-- Overview of available TF pool machines: https://tfpool.retool.com/embedded/public/79b8f1d7-c1bd-473c-a27f-4b7c6ab4693f
 - Check [TF pool FAQ](http://poolmgr.informatik.uni-freiburg.de/?id=103)
+- Project folder is empty: There are invisible folders, use `cd` and the full path where you want to go instead of using `ls` or completion with the tab key.
+
+### Which GPUs are free?
+
+- Try [this website](https://tfpool.retool.com/embedded/public/79b8f1d7-c1bd-473c-a27f-4b7c6ab4693f)
+  or consult the readme in `poolscripts/` to get a list of free GPUs. 
+
+### Using jupyter notebooks on the pool
+
+The easy way to do this is to run the server and browser on the same machine (either directly sit in the pool
+or setup everything on your home computer).
+
+However, if your code is running on a *different computer as the browser* , i.e.
+you are running the code on a pool machine
+but running the browser on your home computer) you will need to:
+
+1. start the respective server on the pool machine.
+2. establish a SSH tunnel from your home computer to the tf login node.
+3. establish a SSH tunnel from the tf login node to the pool machine where the server is running.
+
+The tunneling command looks like this:
+
+`ssh -v -N -L ${port}:localhost:${port} "${user}@${targethost}"`
+
+You might need to change the port of your server application if the port is already in use by another person.
+Note that everyone who can access the login node will be potentially able to see your server.
+Jupyter notebook protects this with an access token by default, but tensorboard does not.
+
 
 ### I have to input my password all the time
 
@@ -67,10 +97,13 @@ on the login server to login to the pool PCs. [Tutorial](https://www.ssh.com/aca
   - the pretrained weights are stored under `~/.cache/torch...`
   - change this directory in all python scripts
   - [see stackoverflow](https://stackoverflow.com/questions/52628270/is-there-any-way-i-can-download-the-pre-trained-models-available-in-pytorch-to-a)
+- make sure to install conda into project folder and not home folder.
 
-### use shared conda environment
+### Where is the physical location of the pool machines? (2023)
 
-Currently we investigate whether this works. For now, create your own installation and environments in the project folder.
+ It's in building 076 (old "Uniradio" site). In the room on the ground floor there are
+20 seats with a PC each. The room on the upper floor is now intended mostly for group study and
+has only 6 or 7 pool PCs available.
 
 ## Recommended: vscode - IDE for working on pool machines
 
@@ -103,42 +136,37 @@ steps to install vs-code (on linux without sudo)
 
 ### VSCode Shortcuts:
 
-    - https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
-    - https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf
-    - https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf
-    - open terminal: ctrl j
-    - open settings: ctrl ,
-    - open command palette: ctrl shift p
-    - set python interpreter of your conda environment: 
-        ctrl shift p 
-        python select interpreter
-        choose path to your conda environment
-        complaints about not knowing numpy will be gone
+	- https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
+	- https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf
+	- https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf
+	- open terminal: ctrl j
+	- open settings: ctrl ,
+	- open command palette: ctrl shift p
+	- set python interpreter of your conda environment: 
+		ctrl shift p 
+		python select interpreter
+		choose path to your conda environment
+		complaints about not knowing numpy will be gone
 
 ### Remote SSH in vscode directly to a pool machine
 
 Instead of connecting vscode to the login node via ssh and then connect in the terminal to one of
 the pool machines, one can directly connect via ssh to a pool machine as follows:
-
 - Crtl+shift+p: then Remote-SSH: Open SSH Configuration File and choose your loca config file.
 - Usually you will see an entry for every server like:
-  
-  ```
-  Host login.informatik.uni-freiburg.de
+```
+Host login.informatik.uni-freiburg.de
   HostName login.informatik.uni-freiburg.de
   User username
-  ```
-  
-  Since the pool machines are only accessible after connecting to login, you can add one more entry for a pool machine as follows:
-  
-  ```
-  Host tfpool21
+```
+Since the pool machines are only accessible after connecting to login, you can add one more entry for a pool machine as follows:
+```
+Host tfpool21
   HostName tfpool21
   ProxyJump login.informatik.uni-freiburg.de
   User username
-  ```
-  
-  Then, when you select tfpool21, it will first connect to login and then to tfpool21, hence will ask for the password twice.
+```
+Then, when you select tfpool21, it will first connect to login and then to tfpool21, hence will ask for the password twice.
 
 This is required when running jupyter notebook that requires libraries that are not installed on the login node (exercise 07).
 
@@ -157,3 +185,7 @@ if it does not pop up: hover over link in cmd and click on 'follow link using fo
 ### Batch Norm
 
 - nice explanation of intuition and parameters: [batchnorm-towardsdatascience](https://towardsdatascience.com/batch-norm-explained-visually-how-it-works-and-why-neural-networks-need-it-b18919692739)
+
+## Exam
+
+- Are the exercises relevant for the exam? Answer: The exam will be based on the lecture content. Nonetheless it is a lot easier to understand the concepts if you actually use them in practice.
