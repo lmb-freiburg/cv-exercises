@@ -189,3 +189,6 @@ if it does not pop up: hover over link in cmd and click on 'follow link using fo
 ## Exam
 
 - Are the exercises relevant for the exam? Answer: The exam will be based on the lecture content. Nonetheless it is a lot easier to understand the concepts if you actually use them in practice.
+- When is the exam? Answer: The exam will show up in HisInOne once it is planned.
+- When is the exam review? Answer: The exam review date will be posted on the website. Typically it is at the very end of the semester break.
+
