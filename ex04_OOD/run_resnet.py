@@ -51,7 +51,7 @@ def main():
     parser.add_argument(
         "--data_dir",
         type=str,
-        default="/project/cv-ws2425/lmb/data",
+        default="/project/cv-ws2425/lmb/data/data",
         help="where to load the data from",
     )
     args = parser.parse_args()
