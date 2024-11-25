@@ -138,11 +138,11 @@ def save_all(
 
 
 def load_model(path, model, strict=True):
-    model.load_state_dict(torch.load(path, map_location="cpu"), strict=strict)
+    model.load_state_dict(torch.load(path, map_location="cpu", weights_only=True), strict=strict)
 
 
 def load_all(path, model, optim=None, scheduler=None):
-    checkpoint = torch.load(path, map_location="cpu")
+    checkpoint = torch.load(path, map_location="cpu", weights_only=True)
     model.load_state_dict(checkpoint["model_state_dict"])
 
     if optim is not None:
