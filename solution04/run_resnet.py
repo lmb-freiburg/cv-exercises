@@ -1,8 +1,10 @@
 import argparse
 import copy
+import random
 from pathlib import Path
 from pprint import pprint
 
+import numpy as np
 import torch
 import torchvision.datasets as datasets
 import torchvision.models as models
@@ -30,7 +32,7 @@ def main():
         type=int,
         default=0,
         help="number of data loader threads per dataloader. "
-        "0 will use the main thread and is good for debugging",
+             "0 will use the main thread and is good for debugging",
     )
     parser.add_argument(
         "--num_bn_updates", type=int, default=10, help="number of batch norm updates"
@@ -54,7 +56,15 @@ def main():
         default="/project/cv-ws2425/lmb/data/data",
         help="where to load the data from",
     )
+    parser.add_argument("--seed", type=int, default=42, help="Random seed")
     args = parser.parse_args()
+
+    # seed everything
+    seed = int(args.seed)
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    print(f"Seed set: {seed}")
 
     # set device
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
