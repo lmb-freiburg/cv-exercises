@@ -57,6 +57,7 @@ the larger the batch size the more stable and meaningful they become.
 
 ## Num bn updates experiment
 
+`batch_size = 64`,
 only run it for default glass_blur severity 1
 
 ```bash
