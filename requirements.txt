@@ -18,3 +18,7 @@ imageio
 pandas
 requests
 
+# ex 5+
+tensorboard
+nvidia-ml-py
+

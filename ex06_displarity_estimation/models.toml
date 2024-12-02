@@ -1,0 +1,11 @@
+[basepaths]
+    mw = "/project/cv-ws2425/lmb/data/model_weights"
+[mw]
+    [mw.dispnetc]
+        ckpt = 'dispnet_c_c48_things_short.pt'
+    [mw.dispnets]
+        ckpt = 'dispnet_s_c48_things_short.pt'
+    [mw.flownetc]
+        ckpt = 'flownet_c_c48_chairs_short.pt'
+    [mw.flownets]
+        ckpt = 'flownet_s_c48_chairs_short.pt'
