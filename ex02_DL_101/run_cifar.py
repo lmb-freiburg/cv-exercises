@@ -153,7 +153,7 @@ def main():
                 # log the loss
                 if batch_idx % 100 == 0:
                     print(
-                            f"Validation of epoch {epoch}/{args.num_epochs} step {batch_idx}/{len(test_loader)}")
+                            f"Validation of epoch {epoch + 1}/{args.num_epochs} step {batch_idx}/{len(test_loader)}")
         # normalize accuracy and loss over the number of batches
         avg_loss = total_loss / num_batches
         avg_acc = total_acc / num_batches
