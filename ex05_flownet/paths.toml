@@ -1,0 +1,15 @@
+[FlyingThings3D]
+    [FlyingThings3D.train]
+        lists = '/project/cv-ws2425/lmb/data/FlyingThings3D/sample_lists'
+        root = '/project/cv-ws2425/lmb/data/FlyingThings3D/TRAIN'
+    [FlyingThings3D.test]
+        lists = '/project/cv-ws2425/lmb/data/FlyingThings3D/sample_lists'
+        root = '/project/cv-ws2425/lmb/data/FlyingThings3D/TEST'
+
+[Sintel]
+    lists = '/project/cv-ws2425/lmb/data/Sintel/sample_lists'
+    root = '/project/cv-ws2425/lmb/data/Sintel/data/training'
+
+[FlyingChairs]
+    lists = '/project/cv-ws2425/lmb/data/FlyingChairs/sample_lists'
+    root = '/project/cv-ws2425/lmb/data/FlyingChairs/data'

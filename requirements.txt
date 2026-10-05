@@ -1,0 +1,24 @@
+# use old notebook until interactive matplotlib is fixed
+notebook<7
+jupyterlab
+ipywidgets
+
+fsspec
+matplotlib>=3.3
+numpy>=1.19
+pytest>=6.1
+pycodestyle>=2.6
+scipy>=1.5
+scikit-learn>=0.23
+pillow>=10
+chardet
+opencv-python
+pytoml
+imageio
+pandas
+requests
+
+# ex 5+
+tensorboard
+nvidia-ml-py
+
