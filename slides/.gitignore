@@ -1,0 +1,7 @@
+# The lecture slides are for course participants only and must not be published.
+# Ignore everything in this folder (slides, recordings, extracted text/images, ...)
+# except the files that belong to the repository.
+*
+!.gitignore
+!README.md
+!download.py

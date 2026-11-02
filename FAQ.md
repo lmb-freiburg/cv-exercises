@@ -131,7 +131,7 @@ steps to install vs-code (on linux without sudo)
 - e.g. replace <username> with your username: ssh <username>@login.informatik.uni-freiburg.de
 - then enter password, press f1 again and connect to host, and voila, you're on the tf pool
 - click on open folder and enter the path to your project
-- `/project/cv-ws2324/<username>/cv-exercises/`
+- `/project/cv-ws2627/<username>/cv-exercises/`
 - (in order to have the cv-exercises folder you need to do a `git clone https://github.com/lmb-freiburg/cv-exercises.git`)
 
 ### VSCode Shortcuts:
